@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
 import useProducts from '../hooks/useProducts';
 import { ProductCard, Skeleton } from '../components';
@@ -21,16 +22,34 @@ const PRICE_RANGES = [
 const RATING_OPTIONS = [4, 3, 2];
 
 const Products = () => {
+  const [searchParams] = useSearchParams();
+
+  // Seed initial state from URL query params (?search=, ?category=, ?sort=)
+  const initSearch   = searchParams.get('search')   || '';
+  const initCategory = searchParams.get('category') || '';
+  const initSort     = searchParams.get('sort')      || 'newest';
+
   // Filter state
-  const [search,       setSearch]       = useState('');
-  const [category,     setCategory]     = useState('');
+  const [search,       setSearch]       = useState(initSearch);
+  const [category,     setCategory]     = useState(initCategory);
   const [priceRange,   setPriceRange]   = useState(null);   // { min, max }
   const [minRating,    setMinRating]    = useState(null);
-  const [sortBy,       setSortBy]       = useState('newest');
+  const [sortBy,       setSortBy]       = useState(initSort);
   const [sidebarOpen,  setSidebarOpen]  = useState(false);
 
   // Debounced search
-  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState(initSearch);
+
+  /* Re-sync when URL params change (e.g. user clicks a category card again) */
+  useEffect(() => {
+    const s = searchParams.get('search')   || '';
+    const c = searchParams.get('category') || '';
+    const o = searchParams.get('sort')      || 'newest';
+    setSearch(s);
+    setDebouncedSearch(s);
+    setCategory(c);
+    setSortBy(o);
+  }, [searchParams]);
   const debounceRef = useMemo(() => {
     let timer;
     return (val) => {

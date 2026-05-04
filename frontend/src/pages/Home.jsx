@@ -46,8 +46,8 @@ const Home = () => {
               <Link to="/products" className="btn btn-primary btn-lg animate-glow-pulse">
                 Explore Now →
               </Link>
-              <Link to="/products?category=Electronics" className="btn btn-ghost btn-lg">
-                View Deals
+              <Link to="/products?sort=price_asc" className="btn btn-ghost btn-lg">
+                View Deals 🏷️
               </Link>
             </div>
 
