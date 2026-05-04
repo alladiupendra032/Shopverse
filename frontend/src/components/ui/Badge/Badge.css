@@ -1,0 +1,22 @@
+/* Base — inherits .badge from index.css */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Variants */
+.badge-primary { background: rgba(139,92,246,0.15); color: var(--primary-400); border: 1px solid rgba(139,92,246,0.30); }
+.badge-success { background: rgba(52,211,153,0.15);  color: var(--success);      border: 1px solid rgba(52,211,153,0.30); }
+.badge-warning { background: rgba(251,191,36,0.15);  color: var(--warning);      border: 1px solid rgba(251,191,36,0.30); }
+.badge-error   { background: rgba(248,113,113,0.15); color: var(--error);        border: 1px solid rgba(248,113,113,0.30); }
+.badge-muted   { background: rgba(255,255,255,0.06); color: var(--text-muted);   border: 1px solid var(--border-subtle); }
+
+/* Sizes */
+.badge--sm { padding: 2px 8px; font-size: 10px; }
+.badge--md { padding: 4px 10px; font-size: var(--text-xs); }
+
+/* Dot variant */
+.badge--dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; }
+.badge--dot.badge-success { background: var(--success); border-color: var(--success); }
+.badge--dot.badge-error   { background: var(--error);   border-color: var(--error); }
+.badge--dot.badge-warning { background: var(--warning); border-color: var(--warning); }
+.badge--dot.badge-primary { background: var(--primary-500); border-color: var(--primary-500); }
+
+.badge__icon { display: flex; align-items: center; }

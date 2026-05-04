@@ -1,0 +1,33 @@
+.input-group { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.input-label { font-size: var(--text-xs); font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.input-wrapper { position: relative; display: flex; align-items: center; }
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input::placeholder   { color: var(--text-muted); }
+.input:focus          { border-color: var(--primary-500); box-shadow: 0 0 0 3px var(--primary-glow); }
+.input--error         { border-color: var(--error) !important; }
+.input--error:focus   { box-shadow: 0 0 0 3px rgba(248,113,113,0.25) !important; }
+
+/* Icon slots */
+.input-icon { position: absolute; top: 50%; transform: translateY(-50%); color: var(--text-muted); display: flex; align-items: center; pointer-events: none; }
+.input-icon--left  { left: 14px; }
+.input-icon--right { right: 14px; }
+.input-wrapper--left-icon  .input { padding-left: 42px; }
+.input-wrapper--right-icon .input { padding-right: 42px; }
+
+/* Hint & Error text */
+.input-error { font-size: var(--text-xs); color: var(--error); margin-top: 2px; }
+.input-hint  { font-size: var(--text-xs); color: var(--text-muted); margin-top: 2px; }
