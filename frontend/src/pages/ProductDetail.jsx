@@ -36,6 +36,11 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!product || isOutOfStock) return;
+    if (!user) {
+      toast.info('Please sign in to add items to your cart.');
+      navigate('/login');
+      return;
+    }
     if (inCart) {
       updateQty(id, (cartItem?.quantity || 0) + qty);
     } else {

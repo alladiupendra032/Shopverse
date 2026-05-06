@@ -1,6 +1,7 @@
 import { ShoppingCart, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
+import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../ui/Toast';
 import Badge from '../../ui/Badge';
 import StarRating from '../../ui/StarRating';
@@ -13,6 +14,8 @@ import './ProductCard.css';
  */
 const ProductCard = ({ product }) => {
   const { addItem, cart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const toast = useToast();
 
   const {
@@ -28,6 +31,11 @@ const ProductCard = ({ product }) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
     if (isOutOfStock) return;
+    if (!user) {
+      toast.info('Please sign in to add items to your cart.');
+      navigate('/login');
+      return;
+    }
     addItem({ id, name, price, image_url, stock });
     toast.success(`"${name}" added to cart! 🛒`);
   };

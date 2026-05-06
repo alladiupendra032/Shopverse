@@ -120,6 +120,7 @@ export const CartProvider = ({ children }) => {
 
   /* ── Public actions (local + DB) ── */
   const addItem = (item, qty = 1) => {
+    if (!user) return;   // block unauthenticated additions
     dispatch({ type: 'ADD', payload: { ...item, quantity: qty } });
     dbAddItem(item, qty);
   };
